@@ -1,0 +1,39 @@
+.chart-section {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    background: white;
+    padding: 20px 50px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.download-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #e5e7eb;
+  /* cursor: pointer; */
+  color: black;
+}
+
+.download-btn:hover {
+  background: #d1d5db;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}

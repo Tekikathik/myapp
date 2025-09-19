@@ -1,0 +1,36 @@
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  /* margin-bottom: 24px; */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  padding: 8px 40px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.search-btn {
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background: #d1d5db;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}

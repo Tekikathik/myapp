@@ -1,0 +1,12 @@
+.filter-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6%;
+}
+
+.filter-btn {
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+}
