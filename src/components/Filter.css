@@ -1,0 +1,49 @@
+.Campus{
+    background-color: white;
+    padding: 15px 50px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    border-radius: 20px;
+    color: black;
+}
+.Branch{
+    background-color: white;
+    padding: 15px 50px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: start;
+    align-items: flex-start;
+    border-radius: 20px;
+    color: black;
+}
+.Campus h1{
+    font-size: 20px;
+}
+.Branch h1{
+    font-size: 20px;
+}
+.Coding_PLatform h1{
+    font-size: 20px;
+}
+.Coding_PLatform{
+    background-color: white;
+    padding: 15px 20px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: start;
+    align-items: flex-start;
+    border-radius: 20px;
+    color: black;
+}
+.Filterrr{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: 10px;
+    /* background-color: aqua; */
+    padding: 20px;
+}

@@ -16,11 +16,11 @@ const ChartSection = ({ data }) => {
     <div className="chart-section">
       <ResponsiveContainer width={700} height={450}>
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="5 5" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="value" fill="#94a3b8" radius={[6, 8, 0, 0,5]} />
+          <Bar dataKey="value" fill="#94a3b8" radius={[6, 8, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
 

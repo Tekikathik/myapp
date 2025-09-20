@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import ChartSection from "./ChartSection";
 import Ranking from "./Ranking";
 import "./Dashboard.css";
+import Filter from "./Filter";
 
 const Dashboard = () => {
   const sidebarItems = [
@@ -23,10 +24,14 @@ const Dashboard = () => {
   ];
 
   const chartData = [
-    { name: "A", value: 30 },
-    { name: "B", value: 60 },
-    { name: "C", value: 80 },
-    { name: "D", value: 100 },
+    { name: "100-200", value: 35 },
+    { name: "300-400", value: 50 },
+    { name: "400-500", value: 80 },
+    { name: "500-600", value: 10 },
+    { name: "500-600", value: 506 },
+    { name: "500-600", value: 100 },
+    { name: "500-600", value: 10 },
+
   ];
 
   const rankingUsers = ["23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX"];
@@ -41,7 +46,9 @@ const Dashboard = () => {
           <ChartSection data={chartData} />
         </div>
       </div>
-      <Ranking users={rankingUsers} />
+      <div className="filtercss">
+        <Filter/>
+      </div>
     </div>
   );
 };

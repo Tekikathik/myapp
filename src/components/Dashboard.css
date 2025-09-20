@@ -21,3 +21,8 @@
     gap: 3%;
     margin-top: 20px;
 }
+.filtercss{
+    display: flex;
+    flex-direction: column;
+    gap: 50%;
+}
