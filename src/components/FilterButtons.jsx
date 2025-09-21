@@ -1,7 +1,7 @@
 import React from "react";
 import "./FilterButtons.css";
 
-const FilterButtons = ({ filters }) => {
+const FilterButtons = ({ filters}) => {
   return (
     <div className="filter-container">
       {filters.map((filter, i) => (

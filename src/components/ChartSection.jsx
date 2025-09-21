@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import "./ChartSection.css";
 
-const ChartSection = ({ data }) => {
+const ChartSection = ({ data,download }) => {
   return (
     <div className="chart-section">
       <ResponsiveContainer width={700} height={450}>
@@ -25,7 +25,7 @@ const ChartSection = ({ data }) => {
       </ResponsiveContainer>
 
       <div className="download-container">
-        <button className="download-btn">
+        <button className="download-btn" onClick={download}>
           <Download className="icon" /> Download
         </button>
       </div>
