@@ -14,7 +14,7 @@ import "./ChartSection.css";
 const ChartSection = ({ data,download }) => {
   return (
     <div className="chart-section">
-      <ResponsiveContainer width={700} height={450}>
+      <ResponsiveContainer width={700} height={400}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="5 5" />
           <XAxis dataKey="name" />

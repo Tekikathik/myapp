@@ -6,12 +6,21 @@
     display: flex;
     gap: 5%;
     justify-content: center;
+<<<<<<< HEAD
     max-width: 100%;
+=======
+    /* max-width: 100%; */
+>>>>>>> 6d6fc97a8c6c7d8bd738a43a01a9773a643eed94
     /* overflow-y: hidden; */
     
 }
+*{padding: 0px; margin: 0px;}
 .main-content{
+<<<<<<< HEAD
     width: 100%;
+=======
+    /* width: 100%; */
+>>>>>>> 6d6fc97a8c6c7d8bd738a43a01a9773a643eed94
     height: 90%;
     width: 60%;
     display: flex;
@@ -19,7 +28,7 @@
     justify-content: start;
     align-items: center;
     gap: 3%;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 .filtercss{
     display: flex;
