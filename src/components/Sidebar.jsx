@@ -5,7 +5,7 @@ const Sidebar = ({ items,updateRecords }) => {
   return (
     <div className="sidebar">
       {items.map((item, i) => (
-        <button key={i} className="sidebar-btn" onClick={()=>updateRecords(i)}>
+        <button key={i} className="sidebar-btn"  onClick={()=>updateRecords(i)}>
           {item}
         </button>
       ))}

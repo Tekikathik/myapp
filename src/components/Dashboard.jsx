@@ -7,109 +7,46 @@ import Ranking from "./Ranking";
 import "./Dashboard.css";
 import Filter from "./Filter";
 import { useState } from "react";
+import * as XLSX from "xlsx";
 
-const apiData=[
-  {"roll":1,"problemsSolved":12,"college":"AUS","pool":3},
-  {"roll":2,"problemsSolved":134,"college":"ACET","pool":1},
-  {"roll":3,"problemsSolved":876,"college":"ACOE","pool":5},
-  {"roll":4,"problemsSolved":478,"college":"AUS","pool":2},
-  {"roll":5,"problemsSolved":990,"college":"ACET","pool":4},
-  {"roll":6,"problemsSolved":150,"college":"ACOE","pool":1},
-  {"roll":7,"problemsSolved":667,"college":"AUS","pool":2},
-  {"roll":8,"problemsSolved":222,"college":"ACET","pool":5},
-  {"roll":9,"problemsSolved":349,"college":"ACOE","pool":3},
-  {"roll":10,"problemsSolved":815,"college":"AUS","pool":4},
-  {"roll":11,"problemsSolved":431,"college":"ACET","pool":2},
-  {"roll":12,"problemsSolved":690,"college":"ACOE","pool":1},
-  {"roll":13,"problemsSolved":127,"college":"AUS","pool":5},
-  {"roll":14,"problemsSolved":554,"college":"ACET","pool":4},
-  {"roll":15,"problemsSolved":366,"college":"ACOE","pool":3},
-  {"roll":16,"problemsSolved":298,"college":"AUS","pool":2},
-  {"roll":17,"problemsSolved":999,"college":"ACET","pool":1},
-  {"roll":18,"problemsSolved":542,"college":"ACOE","pool":5},
-  {"roll":19,"problemsSolved":763,"college":"AUS","pool":4},
-  {"roll":20,"problemsSolved":331,"college":"ACET","pool":3},
-  {"roll":21,"problemsSolved":601,"college":"ACOE","pool":2},
-  {"roll":22,"problemsSolved":444,"college":"AUS","pool":1},
-  {"roll":23,"problemsSolved":287,"college":"ACET","pool":5},
-  {"roll":24,"problemsSolved":913,"college":"ACOE","pool":4},
-  {"roll":25,"problemsSolved":366,"college":"AUS","pool":3},
-  {"roll":26,"problemsSolved":847,"college":"ACET","pool":2},
-  {"roll":27,"problemsSolved":476,"college":"ACOE","pool":1},
-  {"roll":28,"problemsSolved":198,"college":"AUS","pool":5},
-  {"roll":29,"problemsSolved":525,"college":"ACET","pool":4},
-  {"roll":30,"problemsSolved":753,"college":"ACOE","pool":3},
-  {"roll":31,"problemsSolved":115,"college":"AUS","pool":2},
-  {"roll":32,"problemsSolved":658,"college":"ACET","pool":1},
-  {"roll":33,"problemsSolved":889,"college":"ACOE","pool":5},
-  {"roll":34,"problemsSolved":276,"college":"AUS","pool":4},
-  {"roll":35,"problemsSolved":404,"college":"ACET","pool":3},
-  {"roll":36,"problemsSolved":967,"college":"ACOE","pool":2},
-  {"roll":37,"problemsSolved":214,"college":"AUS","pool":1},
-  {"roll":38,"problemsSolved":555,"college":"ACET","pool":5},
-  {"roll":39,"problemsSolved":825,"college":"ACOE","pool":4},
-  {"roll":40,"problemsSolved":189,"college":"AUS","pool":3},
-  {"roll":41,"problemsSolved":734,"college":"ACET","pool":2},
-  {"roll":42,"problemsSolved":353,"college":"ACOE","pool":1},
-  {"roll":43,"problemsSolved":624,"college":"AUS","pool":5},
-  {"roll":44,"problemsSolved":143,"college":"ACET","pool":4},
-  {"roll":45,"problemsSolved":976,"college":"ACOE","pool":3},
-  {"roll":46,"problemsSolved":503,"college":"AUS","pool":2},
-  {"roll":47,"problemsSolved":392,"college":"ACET","pool":1},
-  {"roll":48,"problemsSolved":834,"college":"ACOE","pool":5},
-  {"roll":49,"problemsSolved":247,"college":"AUS","pool":4},
-  {"roll":50,"problemsSolved":681,"college":"ACET","pool":3},
-  {"roll":51,"problemsSolved":320,"college":"ACOE","pool":2},
-  {"roll":52,"problemsSolved":591,"college":"AUS","pool":1},
-  {"roll":53,"problemsSolved":266,"college":"ACET","pool":5},
-  {"roll":54,"problemsSolved":934,"college":"ACOE","pool":4},
-  {"roll":55,"problemsSolved":485,"college":"AUS","pool":3},
-  {"roll":56,"problemsSolved":709,"college":"ACET","pool":2},
-  {"roll":57,"problemsSolved":420,"college":"ACOE","pool":1},
-  {"roll":58,"problemsSolved":856,"college":"AUS","pool":5},
-  {"roll":59,"problemsSolved":162,"college":"ACET","pool":4},
-  {"roll":60,"problemsSolved":633,"college":"ACOE","pool":3},
-  {"roll":61,"problemsSolved":204,"college":"AUS","pool":2},
-  {"roll":62,"problemsSolved":579,"college":"ACET","pool":1},
-  {"roll":63,"problemsSolved":790,"college":"ACOE","pool":5},
-  {"roll":64,"problemsSolved":465,"college":"AUS","pool":4},
-  {"roll":65,"problemsSolved":105,"college":"ACET","pool":3},
-  {"roll":66,"problemsSolved":666,"college":"ACOE","pool":2},
-  {"roll":67,"problemsSolved":317,"college":"AUS","pool":1},
-  {"roll":68,"problemsSolved":958,"college":"ACET","pool":5},
-  {"roll":69,"problemsSolved":539,"college":"ACOE","pool":4},
-  {"roll":70,"problemsSolved":174,"college":"AUS","pool":3},
-  {"roll":71,"problemsSolved":612,"college":"ACET","pool":2},
-  {"roll":72,"problemsSolved":378,"college":"ACOE","pool":1},
-  {"roll":73,"problemsSolved":891,"college":"AUS","pool":5},
-  {"roll":74,"problemsSolved":251,"college":"ACET","pool":4},
-  {"roll":75,"problemsSolved":745,"college":"ACOE","pool":3},
-  {"roll":76,"problemsSolved":198,"college":"AUS","pool":2},
-  {"roll":77,"problemsSolved":583,"college":"ACET","pool":1},
-  {"roll":78,"problemsSolved":439,"college":"ACOE","pool":5},
-  {"roll":79,"problemsSolved":774,"college":"AUS","pool":4},
-  {"roll":80,"problemsSolved":302,"college":"ACET","pool":3},
-  {"roll":81,"problemsSolved":692,"college":"ACOE","pool":2},
-  {"roll":82,"problemsSolved":215,"college":"AUS","pool":1},
-  {"roll":83,"problemsSolved":558,"college":"ACET","pool":5},
-  {"roll":84,"problemsSolved":924,"college":"ACOE","pool":4},
-  {"roll":85,"problemsSolved":333,"college":"AUS","pool":3},
-  {"roll":86,"problemsSolved":713,"college":"ACET","pool":2},
-  {"roll":87,"problemsSolved":145,"college":"ACOE","pool":1},
-  {"roll":88,"problemsSolved":986,"college":"AUS","pool":5},
-  {"roll":89,"problemsSolved":276,"college":"ACET","pool":4},
-  {"roll":90,"problemsSolved":842,"college":"ACOE","pool":3},
-  {"roll":91,"problemsSolved":361,"college":"AUS","pool":2},
-  {"roll":92,"problemsSolved":607,"college":"ACET","pool":1},
-  {"roll":93,"problemsSolved":473,"college":"ACOE","pool":5},
-  {"roll":94,"problemsSolved":864,"college":"AUS","pool":4},
-  {"roll":95,"problemsSolved":293,"college":"ACET","pool":3},
-  {"roll":96,"problemsSolved":657,"college":"ACOE","pool":2},
-  {"roll":97,"problemsSolved":402,"college":"AUS","pool":1},
-  {"roll":98,"problemsSolved":735,"college":"ACET","pool":5},
-  {"roll":99,"problemsSolved":521,"college":"ACOE","pool":4},
- 
-]
+const apiData = [
+  { "roll": 1, "problemsSolved": 532, "college": "AUS", "pool": 3, "branch": "CSE", "codechefRating": 1620, "leetcodeRating": 1850, "codeforcesRating": 1725, "gfgRating": 1550, "highestRating": 1850 },
+  { "roll": 2, "problemsSolved": 134, "college": "ACET", "pool": 1, "branch": "AIML", "codechefRating": 1410, "leetcodeRating": 1600, "codeforcesRating": 1500, "gfgRating": 1320, "highestRating": 1600 },
+  { "roll": 3, "problemsSolved": 823, "college": "ACOE", "pool": 5, "branch": "IT", "codechefRating": 1900, "leetcodeRating": 2100, "codeforcesRating": 1980, "gfgRating": 1750, "highestRating": 2100 },
+  { "roll": 4, "problemsSolved": 78, "college": "AUS", "pool": 2, "branch": "DS", "codechefRating": 1200, "leetcodeRating": 1350, "codeforcesRating": 1250, "gfgRating": 1100, "highestRating": 1350 },
+  { "roll": 5, "problemsSolved": 640, "college": "AEC", "pool": 4, "branch": "CSE", "codechefRating": 1750, "leetcodeRating": 1920, "codeforcesRating": 1850, "gfgRating": 1600, "highestRating": 1920 },
+  { "roll": 6, "problemsSolved": 245, "college": "AUS", "pool": 1, "branch": "IT", "codechefRating": 1500, "leetcodeRating": 1700, "codeforcesRating": 1600, "gfgRating": 1400, "highestRating": 1700 },
+  { "roll": 7, "problemsSolved": 999, "college": "ACET", "pool": 5, "branch": "ECE", "codechefRating": 2000, "leetcodeRating": 2200, "codeforcesRating": 2100, "gfgRating": 1900, "highestRating": 2200 },
+  { "roll": 8, "problemsSolved": 412, "college": "ACOE", "pool": 3, "branch": "EEE", "codechefRating": 1680, "leetcodeRating": 1800, "codeforcesRating": 1700, "gfgRating": 1500, "highestRating": 1800 },
+  { "roll": 9, "problemsSolved": 300, "college": "AUS", "pool": 2, "branch": "MECH", "codechefRating": 1450, "leetcodeRating": 1600, "codeforcesRating": 1500, "gfgRating": 1350, "highestRating": 1600 },
+  { "roll": 10, "problemsSolved": 721, "college": "AEC", "pool": 4, "branch": "CSE", "codechefRating": 1820, "leetcodeRating": 2000, "codeforcesRating": 1900, "gfgRating": 1700, "highestRating": 2000 },
+  { "roll": 11, "problemsSolved": 155, "college": "ACET", "pool": 1, "branch": "CIVIL", "codechefRating": 1300, "leetcodeRating": 1450, "codeforcesRating": 1400, "gfgRating": 1200, "highestRating": 1450 },
+  { "roll": 12, "problemsSolved": 580, "college": "ACOE", "pool": 3, "branch": "AIML", "codechefRating": 1720, "leetcodeRating": 1880, "codeforcesRating": 1750, "gfgRating": 1600, "highestRating": 1880 },
+  { "roll": 13, "problemsSolved": 67, "college": "AUS", "pool": 2, "branch": "IT", "codechefRating": 1150, "leetcodeRating": 1300, "codeforcesRating": 1200, "gfgRating": 1050, "highestRating": 1300 },
+  { "roll": 14, "problemsSolved": 835, "college": "AEC", "pool": 5, "branch": "CSE", "codechefRating": 1950, "leetcodeRating": 2100, "codeforcesRating": 2000, "gfgRating": 1800, "highestRating": 2100 },
+  { "roll": 15, "problemsSolved": 422, "college": "ACET", "pool": 3, "branch": "ECE", "codechefRating": 1650, "leetcodeRating": 1780, "codeforcesRating": 1700, "gfgRating": 1500, "highestRating": 1780 },
+  { "roll": 16, "problemsSolved": 910, "college": "ACOE", "pool": 5, "branch": "CSE", "codechefRating": 2050, "leetcodeRating": 2200, "codeforcesRating": 2100, "gfgRating": 1850, "highestRating": 2200 },
+  { "roll": 17, "problemsSolved": 156, "college": "AUS", "pool": 2, "branch": "IT", "codechefRating": 1320, "leetcodeRating": 1450, "codeforcesRating": 1380, "gfgRating": 1200, "highestRating": 1450 },
+  { "roll": 18, "problemsSolved": 677, "college": "AEC", "pool": 4, "branch": "EEE", "codechefRating": 1780, "leetcodeRating": 1950, "codeforcesRating": 1820, "gfgRating": 1650, "highestRating": 1950 },
+  { "roll": 19, "problemsSolved": 245, "college": "ACET", "pool": 1, "branch": "MECH", "codechefRating": 1480, "leetcodeRating": 1600, "codeforcesRating": 1520, "gfgRating": 1350, "highestRating": 1600 },
+  { "roll": 20, "problemsSolved": 830, "college": "ACOE", "pool": 5, "branch": "AIML", "codechefRating": 1920, "leetcodeRating": 2100, "codeforcesRating": 2000, "gfgRating": 1750, "highestRating": 2100 },
+  { "roll": 21, "problemsSolved": 310, "college": "AUS", "pool": 2, "branch": "CIVIL", "codechefRating": 1400, "leetcodeRating": 1550, "codeforcesRating": 1480, "gfgRating": 1300, "highestRating": 1550 },
+  { "roll": 22, "problemsSolved": 599, "college": "AEC", "pool": 4, "branch": "CSE", "codechefRating": 1760, "leetcodeRating": 1900, "codeforcesRating": 1800, "gfgRating": 1620, "highestRating": 1900 },
+  { "roll": 23, "problemsSolved": 72, "college": "ACET", "pool": 1, "branch": "EEE", "codechefRating": 1180, "leetcodeRating": 1300, "codeforcesRating": 1220, "gfgRating": 1050, "highestRating": 1300 },
+  { "roll": 24, "problemsSolved": 940, "college": "ACOE", "pool": 5, "branch": "CSE", "codechefRating": 2100, "leetcodeRating": 2250, "codeforcesRating": 2150, "gfgRating": 1900, "highestRating": 2250 },
+  
+  // 10 new records
+  { "roll": 25, "problemsSolved": 420, "college": "AUS", "pool": 3, "branch": "CSE", "codechefRating": 1600, "leetcodeRating": 1750, "codeforcesRating": 1680, "gfgRating": 1500, "highestRating": 1750 },
+  { "roll": 26, "problemsSolved": 315, "college": "ACET", "pool": 2, "branch": "AIML", "codechefRating": 1550, "leetcodeRating": 1650, "codeforcesRating": 1600, "gfgRating": 1450, "highestRating": 1650 },
+  { "roll": 27, "problemsSolved": 875, "college": "ACOE", "pool": 5, "branch": "IT", "codechefRating": 2000, "leetcodeRating": 2150, "codeforcesRating": 2100, "gfgRating": 1850, "highestRating": 2150 },
+  { "roll": 28, "problemsSolved": 190, "college": "AUS", "pool": 1, "branch": "DS", "codechefRating": 1300, "leetcodeRating": 1450, "codeforcesRating": 1380, "gfgRating": 1200, "highestRating": 1450 },
+  { "roll": 29, "problemsSolved": 670, "college": "ACET", "pool": 4, "branch": "CSE", "codechefRating": 1800, "leetcodeRating": 1950, "codeforcesRating": 1850, "gfgRating": 1600, "highestRating": 1950 },
+  { "roll": 30, "problemsSolved": 510, "college": "ACOE", "pool": 3, "branch": "AIML", "codechefRating": 1700, "leetcodeRating": 1850, "codeforcesRating": 1750, "gfgRating": 1550, "highestRating": 1850 },
+  { "roll": 31, "problemsSolved": 305, "college": "AUS", "pool": 2, "branch": "IT", "codechefRating": 1500, "leetcodeRating": 1650, "codeforcesRating": 1580, "gfgRating": 1400, "highestRating": 1650 },
+  { "roll": 32, "problemsSolved": 780, "college": "ACET", "pool": 5, "branch": "ECE", "codechefRating": 1950, "leetcodeRating": 2100, "codeforcesRating": 2000, "gfgRating": 1750, "highestRating": 2100 },
+  { "roll": 33, "problemsSolved": 780, "college": "ACET", "pool": 5, "branch": "ECE", "codechefRating": 1950, "leetcodeRating": 2100, "codeforcesRating": 2000, "gfgRating": 1750, "highestRating": 2100 }
+];
+
 
 
 
@@ -128,65 +65,176 @@ const Dashboard = () => {
     "Contest Rating",
     "Highest Contest Rating",
   ];
+
+  const [codingType,setCoding_type]=useState(0)
+  const coding_feature=(idx)=>{
+    setCoding_type(idx);
+  }
   const [finalArr,setArr]=useState([0,0,0,0,0,0]);
   const [List,setList]=useState([]);
-  // let li=[];
+  const [selectedPool, setSelectedPool] = useState(0);   
+const [selectedColleges, setSelectedColleges] = useState([]);
+const [selectedBranches, setSelectedBranches] = useState([]);
+const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+
 const updateRecords=(idx)=>{
-  let li=[]
+  setSelectedPool(idx)
+  applyFilters(idx,selectedColleges,selectedBranches,selectedPlatforms)
+
+}
+
+const applyFilters = (pool, colleges, branches, platforms) => {
+  let filtered = apiData;
+
+  // pool filter
+  if (pool !== 0) {
+    filtered = filtered.filter(item => item.pool === pool);
+  }
+
+  // college filter
+  if (colleges.length > 0) {
+    filtered = filtered.filter(item =>
+      colleges.includes(item.college.toLowerCase())
+    );
+  }
+
+  // branch filter
+  if (branches.length > 0) {
+    filtered = filtered.filter(item =>
+      branches.includes(item.branch?.toLowerCase())
+    );
+  }
+
+  // platform filter
+  if (platforms.length > 0) {
+    filtered = filtered.filter(item =>
+      platforms.includes(item.platform?.toLowerCase())
+    );
+  }
+
+  setList(filtered);
+  updateGraph(filtered);
+};
+const updateGraph = (List) => {
   let arr = new Array(6).fill(0);
-  apiData.map((ele)=>{
-  //   if(idx==0){
-  // if(ele.problemsSolved>0 && ele.problemsSolved<100) arr[0]++;
-  // else if(ele.problemsSolved>=100 && ele.problemsSolved<200) arr[1]++;
-  // else if(ele.problemsSolved>=200 && ele.problemsSolved<300) arr[2]++;
-  // else if(ele.problemsSolved>=300 && ele.problemsSolved<400) arr[3]++;
-  // else if(ele.problemsSolved>=400 && ele.problemsSolved<500) arr[4]++;
-  // else arr[5]++;
-  // li.push(ele)
-  //   }
-    
-      if(ele.problemsSolved>0 && ele.problemsSolved<100 && ele.pool==idx) arr[0]++;
-      else if(ele.problemsSolved>=100 && ele.problemsSolved<200 && ele.pool==idx) arr[1]++;
-      else if(ele.problemsSolved>=200 && ele.problemsSolved<300 && ele.pool==idx) arr[2]++;
-      else if(ele.problemsSolved>=300 && ele.problemsSolved<400 && ele.pool==idx) arr[3]++;
-      else if(ele.problemsSolved>=400 && ele.problemsSolved<500 && ele.pool==idx) arr[4]++;
-      else if(ele.problemsSolved>=500 && ele.pool==idx) arr[5]++;
-      if(ele.pool==idx) li.push(ele)
-    
-    
-})
-// setList(li)
-setArr([...arr])
-setList(li)
+
+  if (codingType === 0) {
+    List.forEach((ele) => {
+      if (ele.problemsSolved > 0 && ele.problemsSolved < 100) arr[0]++;
+      else if (ele.problemsSolved >= 100 && ele.problemsSolved < 200) arr[1]++;
+      else if (ele.problemsSolved >= 200 && ele.problemsSolved < 300) arr[2]++;
+      else if (ele.problemsSolved >= 300 && ele.problemsSolved < 400) arr[3]++;
+      else if (ele.problemsSolved >= 400 && ele.problemsSolved < 500) arr[4]++;
+      else arr[5]++;
+    });
+  } else if (codingType === 1) {
+    List.forEach((ele) => {
+      let rating = ele.highestRating;
+      if (rating < 1000) arr[0]++;
+      else if (rating >= 1000 && rating < 1300) arr[1]++;
+      else if (rating >= 1300 && rating < 1500) arr[2]++;
+      else if (rating >= 1500 && rating < 1700) arr[3]++;
+      else arr[4]++;
+    });
+  }
+
+  setArr([...arr]);
+};
 
 
+const handleCollegeChange=(e)=>{
+  let li=selectedColleges
+  let check=e.target;
+  if(check.checked){
+    li.push(e.target.value)
+  }else{
+    li=li.filter(ele=>ele!=e.target.value)
+  }
+  console.log(li)
+  setSelectedColleges(li);
+  applyFilters(selectedPool,li,selectedBranches,selectedPlatforms)
+}
+const handleBranchChange=(e)=>{
+  let li=selectedBranches
+  let check=e.target;
+  if(check.checked){
+    li.push(e.target.value)
+  }else{
+    li=li.filter(ele=>ele!=e.target.value)
+  }
+  setSelectedBranches(li)
+  applyFilters(selectedPool,selectedColleges,li,selectedPlatforms)
+}
+
+const handlePlatformChange=(e)=>{
+  let li=selectedPlatforms
+  let check=e.target;
+  if(check.checked){
+    li.push(e.target.value)
+  }else{
+    li=li.filter(ele=>ele!=e.target.value)
+  }
+  setSelectedPlatforms(li)
+  applyFilters(selectedPool,selectedColleges,selectedBranches,li)
 }
 
 
 
-  const chartData = [
+
+
+
+const download=()=>{
+  const ws=XLSX.utils.json_to_sheet(List);
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Sheet1");
+  XLSX.writeFile(wb,"data.xlsx");
+}
+
+  let chartData = [];
+
+if (codingType === 0) {
+  chartData = [
     { name: "<100", value: finalArr[0] },
     { name: "100-199", value: finalArr[1] },
-    { name: "200-299", value: finalArr[2]},
+    { name: "200-299", value: finalArr[2] },
     { name: "300-399", value: finalArr[3] },
-    {name:  "400-499",   value: finalArr[4]},
-    {name:  ">500",   value:  finalArr[5]}
+    { name: "400-499", value: finalArr[4] },
+    { name: ">500", value: finalArr[5] }
   ];
+} else if (codingType === 1) {
+  chartData = [
+    { name: "<1000", value: finalArr[0] },
+    { name: "1000-1299", value: finalArr[1] },
+    { name: "1299-1499", value: finalArr[2] },
+    { name: "1499-1699", value: finalArr[3] },
+    { name: ">=1699", value: finalArr[4] },
+  ];
+} else if (codingType === 2) {
+  chartData = [
+    { name: "<1000", value: 10 },
+    { name: "1000-1299", value: 35 },
+    { name: "1299-1499", value: 15 },
+    { name: "1499-1699", value: 20 },
+    { name: ">=1699", value: 15 },
+  ];
+}
 
+// }
+  
   const rankingUsers = ["23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX", "23A91A61XX"];
 
   return (
     <div className="dashboard">
       <Sidebar items={sidebarItems} updateRecords={updateRecords} />
       <div className="main-content">
-        <FilterButtons filters={filterItems} />
+        <FilterButtons filters={filterItems} coding_feature={coding_feature}/>
         <SearchBar />
         <div className="chart-ranking">
-          <ChartSection data={chartData} />
+          <ChartSection data={chartData} download={download} />
         </div>
       </div>
       <div className="filtercss">
-        <Filter/>
+        <Filter handleCollegeChange={handleCollegeChange} handleBranchChange={handleBranchChange} handlePlatformChange={handlePlatformChange}/>
       </div>
     </div>
   );

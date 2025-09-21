@@ -7,7 +7,7 @@ const SearchBar = () => {
     <div className="search-bar">
       <div className="search-box">
         <Search className="icon" />
-        <span>Search</span>
+        <span>search</span>
       </div>
       <button className="search-btn">Search</button>
     </div>
