@@ -8,6 +8,7 @@ import "./Dashboard.css";
 import Filter from "./Filter";
 import { useState } from "react";
 import * as XLSX from "xlsx";
+import CollegeCircle from "./CollegeCircle";
 
 const apiData = [
   { "roll": 1, "problemsSolved": 532, "college": "AUS", "pool": 3, "branch": "CSE", "codechefRating": 1620, "leetcodeRating": 1850, "codeforcesRating": 1725, "gfgRating": 1550, "highestRating": 1850 },
@@ -73,15 +74,16 @@ const Dashboard = () => {
   const [finalArr,setArr]=useState([0,0,0,0,0,0]);
   const [List,setList]=useState([]);
   const [selectedPool, setSelectedPool] = useState(0);   
-const [selectedColleges, setSelectedColleges] = useState([]);
+const [selectedColleges, setSelectedColleges] = useState([1]);
 const [selectedBranches, setSelectedBranches] = useState([]);
 const [selectedPlatforms, setSelectedPlatforms] = useState([]);
 
 const updateRecords=(idx)=>{
   setSelectedPool(idx)
+  // setSelectedColleges(prev => [...prev, "aec"]);
   applyFilters(idx,selectedColleges,selectedBranches,selectedPlatforms)
-
 }
+const [college,setcollege]=useState([0,0,0])
 
 const applyFilters = (pool, colleges, branches, platforms) => {
   let filtered = apiData;
@@ -90,12 +92,19 @@ const applyFilters = (pool, colleges, branches, platforms) => {
   if (pool !== 0) {
     filtered = filtered.filter(item => item.pool === pool);
   }
-
   // college filter
   if (colleges.length > 0) {
-    filtered = filtered.filter(item =>
-      colleges.includes(item.college.toLowerCase())
-    );
+    const counts = [0, 0, 0];
+
+    filtered.forEach(item => {
+      const name = item.college.toLowerCase();
+      // console.log(name)
+      if (name === "aec") counts[0]++;
+      if (name === "acet") counts[1]++;
+      if (name === "acoe") counts[2]++;
+    });
+
+    setcollege(counts);
   }
 
   // branch filter
@@ -234,6 +243,7 @@ if (codingType === 0) {
         </div>
       </div>
       <div className="filtercss">
+        <CollegeCircle data={college} />
         <Filter handleCollegeChange={handleCollegeChange} handleBranchChange={handleBranchChange} handlePlatformChange={handlePlatformChange}/>
       </div>
     </div>

@@ -5,6 +5,7 @@ import "./ChartSection.css";
 import { useEffect } from "react";
 
 const ChartSection = ({ data, download }) => {
+  // console.log(data)
   const [arr, setArr] = useState([]);
 
   const [state,Setstate] = React.useState({
@@ -75,7 +76,7 @@ const ChartSection = ({ data, download }) => {
   return (
     <div className="chart-section">
 
-      <div id="chart">
+      <div id="chart" className="graph">
         <ReactApexChart
           options={state.options}
           series={state.series}

@@ -4,18 +4,6 @@ import './Filter.css'
 export default function Filter({handleCollegeChange,handleBranchChange,handlePlatformChange }) {
   return (
     <div className='Filterrr'>
-        <div className="Campus">
-            <h1>Campus</h1>
-            <div className="AEC">
-                <input type="checkbox" value="aus" id="" onChange={handleCollegeChange} /> AEC
-            </div>
-            <div className="ACET">
-                <input type="checkbox" value="acet" id="" onChange={handleCollegeChange} /> ACET
-            </div>
-            <div className="ACOE">
-                <input type="checkbox" value="acoe" id="" onChange={handleCollegeChange} /> ACOE
-            </div>
-        </div>
         <div className="Branch">
             <h1>Branch</h1>
             <div className="CSE">
