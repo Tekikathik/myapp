@@ -1,0 +1,195 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.heading{
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+}
+.bodyy{
+    width: 100%;
+    height: 92%;
+
+}
+.search-back{
+    background-color: gray;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin: 10px;
+    align-items: center;
+}
+
+.detail-donot{
+    height: 290px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    background-color: antiquewhite;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.pic{
+    height: 100%;
+    width: 30%;
+}
+
+.donot{
+    height: 90%;
+    width: 30%;
+    
+}
+
+.coding-profile{
+    height: 220px;
+    padding: 14px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: gray;
+    margin: 10px;
+    border-radius: 20px;
+    align-items: center;
+}
+.leetcode{
+    height: 80%;
+    width: 250px;
+    background-color: azure;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding-bottom: 25px;
+}
+.back button{
+    padding: 10px 20px ;
+    border-radius: 10px;
+    border: none;
+}
+button:hover {
+    opacity: 0.5;
+}
+.search {
+    display: flex;
+    gap: 10px;
+}
+.search button{
+    padding: 10px 20px ;
+    border-radius: 10px;
+    border: none;
+}
+.search input{
+    border-radius: 5px;
+    width: 200px;
+    border: 2px solid white;
+}
+.detail-donot{
+    background-color: gray;
+    border-radius: 20px;
+    margin: 10px;
+}
+.detail{
+    border-radius: 0px 20px 20px 0px;
+    margin-left: 40px;
+}
+.detail .pic{
+    /* background-color: black ; */
+    background-color: white;
+    /* opacity: 0.5; */
+}
+.detail .d1{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    margin-left: 50px;
+    gap: 15px;
+}
+.detail .d1 p{
+    font-size: 20px;
+    color: black;
+}
+.donot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coding-profile div{
+    border-radius: 20px;
+}
+/* ======== ApexCharts Tooltip Styling ======== */
+.apexcharts-tooltip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #222 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #dcdcdc !important;
+  padding: 8px 12px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+
+/* Tooltip title (like “Canada”) */
+.apexcharts-tooltip-title {
+  font-weight: 600 !important;
+  color: #000 !important;
+  background: transparent !important;
+  margin-bottom: 4px !important;
+}
+
+.apexcharts-tooltip-marker {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  margin-right: 6px !important;
+  border: 1px solid #fff !important;
+}
+.apexcharts-tooltip-text-y-label {
+  color: #444 !important;
+  font-weight: 500 !important;
+}
+.apexcharts-tooltip-text-y-value {
+  color: #007bff !important;
+  font-weight: 600 !important;
+}
+.apexcharts-tooltip:before {
+  display: none !important;
+}
+.leetcode h1{
+    font-size: larger;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+
+}
+.pic img{
+    width: 100%;
+    height: 100%;
+}
+.leetcode .difficulty{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #000;
+}
+.leetcode .difficulty div:nth-child(1){
+    color: green;
+    font-weight: bold;
+}
+.leetcode .difficulty div:nth-child(2){
+    color: orange;
+    font-weight: bold;
+}
+.leetcode .difficulty div:nth-child(3){
+    color: red;
+    font-weight: bold;
+}

@@ -74,13 +74,12 @@ const Dashboard = () => {
   const [finalArr,setArr]=useState([0,0,0,0,0,0]);
   const [List,setList]=useState([]);
   const [selectedPool, setSelectedPool] = useState(0);   
-const [selectedColleges, setSelectedColleges] = useState([1]);
+const [selectedColleges, setSelectedColleges] = useState(["aec","acet","aceo"]);
 const [selectedBranches, setSelectedBranches] = useState([]);
 const [selectedPlatforms, setSelectedPlatforms] = useState([]);
 
 const updateRecords=(idx)=>{
   setSelectedPool(idx)
-  // setSelectedColleges(prev => [...prev, "aec"]);
   applyFilters(idx,selectedColleges,selectedBranches,selectedPlatforms)
 }
 const [college,setcollege]=useState([0,0,0])
@@ -98,13 +97,16 @@ const applyFilters = (pool, colleges, branches, platforms) => {
 
     filtered.forEach(item => {
       const name = item.college.toLowerCase();
-      // console.log(name)
       if (name === "aec") counts[0]++;
       if (name === "acet") counts[1]++;
       if (name === "acoe") counts[2]++;
     });
-
+    console.log(counts)
     setcollege(counts);
+    // filtered = filtered.filter(item =>
+    //   colleges.includes(item.college?.toLowerCase())
+    // );
+
   }
 
   // branch filter
